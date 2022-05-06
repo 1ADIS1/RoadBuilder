@@ -235,9 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ac0a3f0e0014d10843a45601c54f9e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rows: 4
-  columns: 4
+  rows: 10
+  columns: 10
   tileToInstantiate: {fileID: 5223508351909368463, guid: 8dfe29210f0a0e940a5b46ade64bd8c3, type: 3}
+  camera: {fileID: 519420032}
 --- !u!4 &656355453
 Transform:
   m_ObjectHideFlags: 0

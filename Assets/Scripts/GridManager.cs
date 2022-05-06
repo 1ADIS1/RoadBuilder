@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //TODO: get rid of monobehaviour and introduce Singleton gameManager who will create grid
@@ -7,6 +8,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int rows;
     [SerializeField] private int columns;
     [SerializeField] private GameObject tileToInstantiate;
+    [SerializeField] private Transform camera;
 
     // Key - position in the world space
     // Value - tile in this coordinates
@@ -15,6 +17,7 @@ public class GridManager : MonoBehaviour
     private void Start()
     {
         MakeGrid();
+        CenterCamera();
     }
 
     private void MakeGrid()
@@ -25,14 +28,30 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < columns; j++)
             {
+                // Fill the grid
                 var cellPos = new Vector2(i, j);
                 var instantiatedTile = Instantiate(tileToInstantiate, cellPos, Quaternion.identity).GetComponent<Tile>();
                 
                 grid.Add(cellPos, instantiatedTile);
-                
+                if ((i + j) % 2 == 1) instantiatedTile.SetTransparency(0.75f);
+
                 Debug.Log("Tile row: " + i + " Tile column: " + j);
             }
         }
+    }
+
+    // TODO: move to camera handler
+    private void CenterCamera()
+    {
+        grid.TryGetValue(new Vector2(0, 0), out var tileFirst);
+        grid.TryGetValue(new Vector2(rows - 1, columns - 1), out var tileLast);
+
+        if (!tileFirst || !tileLast) return;
+        camera.position = new Vector3(
+            (tileFirst.transform.position.x + tileLast.transform.position.x) / 2, 
+            (tileFirst.transform.position.x + tileLast.transform.position.x) / 2, 
+            camera.position.z);
+
     }
 
     public Tile GetTile(int row, int column)
