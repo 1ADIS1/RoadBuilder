@@ -53,7 +53,9 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Tile.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GridManager.cs" />
+     <Compile Include="Assets\Scripts\Interfaces.cs" />
  <Reference Include="UnityEngine">
  <HintPath>D:/Programs/Unity/2020.3.22f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>

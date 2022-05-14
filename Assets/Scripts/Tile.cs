@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IClickable, IHoverable
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -11,5 +11,25 @@ public class Tile : MonoBehaviour
         transparentColor.a = alpha;
         
         spriteRenderer.color = transparentColor;
+    }
+
+    public void Click()
+    {
+        SetTransparency(0.5f);
+        Debug.Log("Senpai clicked me ^_^");
+    }
+
+    public void Hover()
+    {
+        var currentColor = spriteRenderer.color;
+        
+        SetTransparency(0.85f);
+
+        spriteRenderer.color = currentColor;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
     }
 }
