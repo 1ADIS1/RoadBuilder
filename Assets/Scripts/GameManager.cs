@@ -1,9 +1,12 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
+// Pattern used: Singleton
 public class GameManager : MonoBehaviour
 {
-    public GameManager Instance { get; private set; }
+    // private IHoverable hoveredObject;
+    // private IClickable clickedObject;
+    
+    public static GameManager Instance { get; private set; }
     
     //Audio stuff...
 
@@ -11,33 +14,49 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(this);
-            
+
         DontDestroyOnLoad(this);
     }
 
-    private void Update()
+    public Vector3 GetMousePositionInWorld(float zComponent)
     {
+        if (Camera.main == null) return Vector3.zero;
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = zComponent;
 
-        // Shoot ray from mousePosition with zero vector direction
-        var raycastHit2D = Physics2D.Raycast(new Vector2(mousePosition.x, mousePosition.y), 
-            Vector2.zero);
-        
-        // If right mouse button is down
-        // and ray hit clickable object
-        if (raycastHit2D && 
-            Input.GetMouseButtonDown(0) && 
-            raycastHit2D.collider.TryGetComponent<IClickable>(out var clickable))
-        {
-            clickable.Click();
-        }
-        
-        // If mouse hovered over hoverable object
-        if (raycastHit2D && 
-            raycastHit2D.collider.TryGetComponent<IHoverable>(out var hoverable) && 
-            Vector3.Distance(mousePosition, hoverable.GetPosition()) < Math.E)
-        {
-            hoverable.Hover();
-        }
+        return mousePosition;
     }
+
+    // private void Update()
+    // {
+    //
+    //     // Shoot ray from mousePosition with zero vector direction
+    //     // var raycastHit2D = Physics2D.Raycast(new Vector2(mousePosition.x, mousePosition.y), 
+    //     //     Vector2.zero);
+    //
+    //     // // If mouse hovered over hoverable object or clicked clickable object
+    //     // if (raycastHit2D && 
+    //     //     raycastHit2D.collider.TryGetComponent<IHoverable>(out var hoverable))
+    //     // {
+    //     //     hoveredObject = hoverable;
+    //     //     hoveredObject.Hover();
+    //     //     
+    //     //     if (Input.GetMouseButtonDown(0) && 
+    //     //         raycastHit2D.collider.TryGetComponent<IClickable>(out var clickable))
+    //     //     {
+    //     //         clickedObject = clickable;
+    //     //         clickedObject.Click();
+    //     //     }
+    //     // }
+    //     // // If nothing was hovered nor clicked
+    //     // else
+    //     // {
+    //     //     hoveredObject = null;
+    //     //
+    //     //     if (Input.GetMouseButtonDown(0))
+    //     //     {
+    //     //         clickedObject = null;
+    //     //     }
+    //     // }
+    // }
 }

@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
 
-internal interface IClickable
+// S.O.L.I.D principle : interface segregation
+
+internal interface IActionReset
 {
-    void Click();
+    void Reset();
 }
 
-internal interface IHoverable
+internal interface IClickable : IActionReset
 {
-    void Hover();
+    // void Click();
+}
+
+internal interface IHoverable : IActionReset
+{
+    // void Hover();
     Vector3 GetPosition();
 }
