@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 277660184497959780}
   - component: {fileID: 7339445883380827910}
   m_Layer: 0
-  m_Name: Brick
+  m_Name: HorizontalRoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -325130993
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2165853484040539114, guid: 95a740f317d2145448f4478ed9cc03e1, type: 3}
+  m_Sprite: {fileID: 1680245095053961704, guid: a1f2aea1f4eede447b43238b9b40897c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a563b4c1f9c0ebc439f2d95cf1b78dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 1680245095053961704, guid: a1f2aea1f4eede447b43238b9b40897c, type: 3}
+  gridPosition: {x: 0, y: 0}
   slotLayerMask:
     serializedVersion: 2
     m_Bits: 8
@@ -116,7 +118,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.96, y: 1.28}
+    oldSize: {x: 0.96, y: 0.96}
     newSize: {x: 1.33, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -3,7 +3,8 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     public Sprite sprite;
-    
+    public Vector2 gridPosition;
+
     [SerializeField] private LayerMask slotLayerMask;
     
     public void OnMouseDrag()
@@ -23,20 +24,11 @@ public class Brick : MonoBehaviour
             );
         
         // If it hit the Slot, then change it's content
-        if (raycastHit2D && raycastHit2D.collider.TryGetComponent(out Slot slot)) 
-            slot.ChangeContent(this);
-
-        
-        // var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //
-        // // Shoot ray from mousePosition with zero vector direction
-        // var raycastHit2D = Physics2D.Raycast(mousePosition, Vector2.zero);
-        //
-        // // If right mouse button is down
-        // // and ray hit clickable object
-        // if (raycastHit2D && raycastHit2D.collider.TryGetComponent<IPlaceable>(out var placeable))
-        // {
-        //     placeable.ChangeContent(this);
-        // }
+        if (raycastHit2D && raycastHit2D.collider.TryGetComponent(out Slot slot))
+        {
+            slot.Place(this);
+            Debug.Log(gridPosition);    
+            BricksSack.instance.RemoveBrick(gridPosition);
+        }
     }
 }

@@ -3,22 +3,14 @@ using UnityEngine;
 public class Slot : MonoBehaviour, IPlaceable
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    
-    public Brick currentBrick;
 
-    public void ClearSlot()
+    public void Place(Brick brick)
     {
-        currentBrick = null;
-    }
-
-    public bool IsEmpty()
-    {
-        return !currentBrick;
-    }
-
-    public void ChangeContent(Brick brick)
-    {
-        currentBrick = brick;
-        Debug.Log("My content was changed");
+        _spriteRenderer.sprite = brick.sprite;
+        var currentRoad = GameManager.Instance.currentRoad;
+        currentRoad[GameManager.Instance.currentRoadSize++] = transform.localPosition;
+        GameManager.Instance.CheckWinRoad();
+        // Debug.Log("Position of the bought slot: " + transform.localPosition);
+        // Debug.Log("My content was changed");
     }
 }

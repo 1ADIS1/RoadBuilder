@@ -4,75 +4,56 @@ using UnityEngine;
 
 public class BricksSack : MonoBehaviour
 {
-    [SerializeField] private Brick brick;
-    [SerializeField] private int bricksNumber;
-    
-    [SerializeField] private int rows;
-    [SerializeField] private int columns;
-
-    public Dictionary<Vector2, Brick> currentBricks;
-
+    public Dictionary<Vector2, Brick> brickSack;
     public Action<Brick> OnBrickCreation;
+
+    [SerializeField] private int maxColumns;
+    private int _row;
+    private int _column;
     
-    private static BricksSack Instance { get; set; }
+    public static BricksSack instance = null;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (instance == null) instance = this;
         else Destroy(this);
         
         DontDestroyOnLoad(this);
-
-        if (rows > columns) MakeHorizontalGrid();
-        else MakeVerticalGrid();
+        brickSack = new Dictionary<Vector2, Brick>();
     }
 
-    private void MakeVerticalGrid()
+    public void CreateBrick(Brick brick)
     {
-        var sackSize = currentBricks.Count;
-        
-        for (int m = 0; m < rows; m++)
-        {
-            for (int n = 0; n < columns; n++)
-            {
-                if (sackSize >= bricksNumber || sackSize >= rows * columns) return;
-
-                CreateBrick();
-                // PositionBrick(sackSize - 1, m, n);
-            }
-        }
-    }
-
-    private void MakeHorizontalGrid()
-    {
-        for (int n = 0; n < columns; n++)
-        {
-            for (int m = 0; m < rows; m++)
-            {
-                if (currentBricks.Count >= bricksNumber || currentBricks.Count >= rows * columns) return;
-                CreateBrick();
-                // PositionBrick(currentBricks.Count - 1, m, n);
-            }
-        }
-    }
-
-    public void CreateBrick()
-    {
-        var spawnedBrick = Instantiate(brick, transform.position, Quaternion.identity);
+        var spawnedBrick = Instantiate(brick, transform.position, Quaternion.identity).GetComponent<Brick>();
         spawnedBrick.transform.SetParent(transform, true);
+
+        var gridPosition = _column <= maxColumns ? 
+            new Vector2(_column++, _row) : 
+            new Vector2(_column, _row++);
+
+        spawnedBrick.transform.localPosition = Vector3.one;
+        spawnedBrick.gridPosition = gridPosition;
+        brickSack.Add(gridPosition, spawnedBrick);
 
         OnBrickCreation?.Invoke(spawnedBrick);
     }
 
-    private void AddBrickToSack(Brick newBrick)
+    public void RemoveBrick(Vector2 localPosition)
     {
-        currentBricks.Add(new Vector2(), newBrick);
-    }
+        Debug.Log(localPosition);
+        foreach (var t in brickSack)
+        {
+            Debug.Log(t);
+        }
+        
+        if (brickSack.ContainsKey(localPosition))
+        {
+            Debug.Log("Destroying..");
 
-    private void PositionBrick(int row, int column)
-    {
-        Vector2 brickPosition = new Vector2(row, column);
-        currentBricks[brickPosition].gameObject.transform.localPosition = brickPosition;
-        // currentBricks[brickPosition] = brickToPosition;
+            Brick brick = brickSack[localPosition];
+            brickSack.Remove(localPosition);
+            Destroy(brick.gameObject);
+            Debug.Log($"The tile {localPosition} was destroyed");
+        }
     }
 }

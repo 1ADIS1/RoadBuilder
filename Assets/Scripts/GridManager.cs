@@ -14,6 +14,11 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform myCamera;
     [SerializeField] private Vector2 offset;
 
+    [SerializeField] private Transform startTile;
+    [SerializeField] private Transform endTile;
+    [SerializeField] private Vector2 startTileCoordinates;
+    [SerializeField] private Vector2 endTileCoordinates;
+
     // Key - position in the world space
     // Value - tile in this coordinates
     private Dictionary<Vector2, Tile> grid;
@@ -34,6 +39,21 @@ public class GridManager : MonoBehaviour
             {
                 // Fill the grid
                 var cellPos = new Vector2(i, j);
+                
+                // Check the essential tiles
+                if (cellPos.Equals(startTileCoordinates))
+                {
+                    startTile.localPosition = cellPos;
+                    startTile.GetComponent<Tile>().InitializeTile(DefaultTransparency);
+                    continue;
+                } 
+                if (cellPos.Equals(endTileCoordinates))
+                {
+                    endTile.localPosition = cellPos;
+                    endTile.GetComponent<Tile>().InitializeTile(DefaultTransparency);
+                    continue;
+                }
+                
                 var instantiatedTile = Instantiate(tileToInstantiate, cellPos, Quaternion.identity).GetComponent<Tile>();
                 instantiatedTile.InitializeTile(DefaultTransparency);
                 instantiatedTile.transform.SetParent(transform);
@@ -43,7 +63,7 @@ public class GridManager : MonoBehaviour
                 // Make a chessboard color scheme
                 if ((i + j) % 2 == 1) instantiatedTile.InitializeTile(0.75f);
 
-                Debug.Log("Tile row: " + i + " Tile column: " + j);
+                // Debug.Log("Tile row: " + i + " Tile column: " + j);
             }
         }
     }

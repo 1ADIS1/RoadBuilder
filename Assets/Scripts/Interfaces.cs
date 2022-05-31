@@ -4,5 +4,5 @@
 
 interface IPlaceable
 {
-    void ChangeContent(Brick brick);
+    void Place(Brick brick);
 }
