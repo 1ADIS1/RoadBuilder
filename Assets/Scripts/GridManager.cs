@@ -36,6 +36,7 @@ public class GridManager : MonoBehaviour
                 var cellPos = new Vector2(i, j);
                 var instantiatedTile = Instantiate(tileToInstantiate, cellPos, Quaternion.identity).GetComponent<Tile>();
                 instantiatedTile.InitializeTile(DefaultTransparency);
+                instantiatedTile.transform.SetParent(transform);
                 
                 grid.Add(cellPos, instantiatedTile);
                 

@@ -2,18 +2,7 @@
 
 // S.O.L.I.D principle : interface segregation
 
-internal interface IActionReset
+interface IPlaceable
 {
-    void Reset();
-}
-
-internal interface IClickable : IActionReset
-{
-    // void Click();
-}
-
-internal interface IHoverable : IActionReset
-{
-    // void Hover();
-    Vector3 GetPosition();
+    void ChangeContent(Brick brick);
 }

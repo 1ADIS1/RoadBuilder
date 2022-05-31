@@ -26,37 +26,6 @@ public class GameManager : MonoBehaviour
 
         return mousePosition;
     }
-
-    // private void Update()
-    // {
-    //
-    //     // Shoot ray from mousePosition with zero vector direction
-    //     // var raycastHit2D = Physics2D.Raycast(new Vector2(mousePosition.x, mousePosition.y), 
-    //     //     Vector2.zero);
-    //
-    //     // // If mouse hovered over hoverable object or clicked clickable object
-    //     // if (raycastHit2D && 
-    //     //     raycastHit2D.collider.TryGetComponent<IHoverable>(out var hoverable))
-    //     // {
-    //     //     hoveredObject = hoverable;
-    //     //     hoveredObject.Hover();
-    //     //     
-    //     //     if (Input.GetMouseButtonDown(0) && 
-    //     //         raycastHit2D.collider.TryGetComponent<IClickable>(out var clickable))
-    //     //     {
-    //     //         clickedObject = clickable;
-    //     //         clickedObject.Click();
-    //     //     }
-    //     // }
-    //     // // If nothing was hovered nor clicked
-    //     // else
-    //     // {
-    //     //     hoveredObject = null;
-    //     //
-    //     //     if (Input.GetMouseButtonDown(0))
-    //     //     {
-    //     //         clickedObject = null;
-    //     //     }
-    //     // }
-    // }
+    
+    
 }

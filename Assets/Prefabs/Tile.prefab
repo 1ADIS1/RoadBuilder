@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 5223508351909368457}
   - component: {fileID: 5223508351909368456}
   - component: {fileID: -7696966472924529128}
+  - component: {fileID: 8679531596349992422}
   - component: {fileID: 3142408415104143162}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5223508351909368457
 Transform:
@@ -97,6 +98,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 5223508351909368456}
+--- !u!114 &8679531596349992422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5223508351909368463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aa260d227732cb4988c6ec58d0bd861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 5223508351909368456}
+  currentBrick: {fileID: 0}
 --- !u!61 &3142408415104143162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -107,7 +122,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
